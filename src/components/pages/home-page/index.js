@@ -1,5 +1,3 @@
 import HomePage from './home-page';
 
-export {
-  HomePage,
-};
+export default HomePage;
