@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './book-list.css';
 
 import BookListItem from '../book-list-item';
@@ -26,5 +27,12 @@ class BookList  extends Component {
   }
 };
 
+// describes what data the component will receive from redax
+const mapStateToProps = (state) => {
 
-export default BookList;
+  return {
+    books: state.books
+  };
+}
+
+export default connect(mapStateToProps)(BookList);
