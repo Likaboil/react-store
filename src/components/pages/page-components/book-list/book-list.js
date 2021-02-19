@@ -1,4 +1,7 @@
 import React from 'react';
+import './book-list.css';
+
+import BookListItem from '../book-list-item';
 
 const BookList = ({books}) => {
 
@@ -7,9 +10,9 @@ const BookList = ({books}) => {
       {
         books.map((book) => {
           return (
-            <li key={book.title}
+            <li key={book.id}
                 className="list-group-item">
-              <span className="">{book.title}</span>
+              <BookListItem book={book}/>
             </li>
           );
         })
