@@ -1,10 +1,16 @@
 import React from 'react';
 
+import { CartTable } from '../page-components';
+import ErrorBoundry from '../../error-boundry';
+
 const CartPage = () => {
   return (
-    <div>
-      <h2>CartPage</h2>
-    </div>
+    <ErrorBoundry>
+      <div className="container-md">
+        <h2 className="visually-hidden">CartPage</h2>
+        <CartTable />
+      </div>
+    </ErrorBoundry>
   );
 };
 
