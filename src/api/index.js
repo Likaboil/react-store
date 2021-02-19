@@ -1,3 +1,3 @@
-import BookstoreService from './api';
+import BookstoreService from './bookstore-service';
 
 export default BookstoreService;
