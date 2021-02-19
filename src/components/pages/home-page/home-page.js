@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { BookList } from '../page-components';
+import ErrorBoundry from '../../error-boundry';
 
 const HomePage = () => {
 
@@ -13,7 +14,7 @@ const HomePage = () => {
       author: 'Author'
     },
     {
-      id: 1,
+      id: 2,
       price: 35,
       coverImage: 'https://images-na.ssl-images-amazon.com/images/I/41yJ75gpV-L._SX381_BO1,204,203,200_.jpg',
       title: 'Book2',
@@ -22,10 +23,12 @@ const HomePage = () => {
   ];
 
   return (
-    <div className="container-md">
-      <h2 className="visually-hidden">HomePage</h2>
-      <BookList books={books} />
-    </div>
+    <ErrorBoundry>
+      <div className="container-md">
+        <h2 className="visually-hidden">HomePage</h2>
+        <BookList books={books} />
+      </div>
+    </ErrorBoundry>
   );
 };
 
