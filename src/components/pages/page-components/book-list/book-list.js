@@ -18,20 +18,7 @@ import ErrorIndicator from '../../../error-indicator';
 class BookList  extends Component {
 
   componentDidMount() {
-    // recieve data
-      const {
-        bookstoreService,
-        booksLoaded,
-        booksRequested,
-        booksError
-      } = this.props;
-
-    booksRequested();   // show spinner until get data
-
-    bookstoreService.getBooks()
-        // dispatch action to store
-      .then((data) => booksLoaded(data))
-      .catch((error) => booksError(error));
+    this.props.fetchBooks();
   }
 
   render() {
@@ -74,12 +61,18 @@ const mapStateToProps = (state) => {
 // dispatch data changes
 // booksLoaded, booksRequested is action-creator from 'src/action/
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    booksLoaded,
-    booksRequested,
-    booksError,
-  }, dispatch)
+const mapDispatchToProps = (dispatch, ownProps) => {
+  const {bookstoreService} = ownProps;
+
+  return {
+    fetchBooks: () => {
+      dispatch(booksRequested()); // show spinner until get data
+
+      bookstoreService.getBooks()  // recieve data
+       .then((data) => dispatch(booksLoaded(data)))  // dispatch action to store
+       .catch((error) => dispatch(booksError(error)));
+    }
+  }
 };
 
 export default compose(
