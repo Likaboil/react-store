@@ -1,7 +1,43 @@
 import React from 'react';
 import './cart-table.css';
 
-const CartTable = () => {
+const CartTable = ({ items, total,
+                      onIncrease, onDecrease, onDelete}) => {
+
+  const renderRow = (item, idx) => {
+    const {id, count, title, price} = item;
+
+    return (
+      <tr key={id}>
+
+        <td>{idx}</td>
+        <td>{title}</td>
+        <td>{count}</td>
+        <td>{price}</td>
+
+        <td>
+          <button
+              onClick = {() => onDecrease(id)}
+              className="btn btn-outline-danger btn-sm float-right"
+          >
+            <i className="fa fa-trash-o" />
+          </button>
+          <button
+              onClick = {() => onIncrease(id)}
+              className="btn btn-outline-success btn-sm float-right"
+          >
+            <i className="fa fa-plus-circle" />
+          </button>
+          <button
+              onClick = {() => onDelete(id)}
+              className="btn btn-outline-warning btn-sm float-right"
+          >
+            <i className="fa fa-minus-circle" />
+          </button>
+        </td>
+      </tr>
+    );
+  };
 
   return (
     <div className="shopping-cart-table">
@@ -19,31 +55,12 @@ const CartTable = () => {
         </thead>
 
         <tbody>
-          <tr key={1}>
-            <td>title</td>
-            <td>count</td>
-            <td>$total</td>
-            <td>price</td>
-            <td>
-              <button
-                className="btn btn-outline-danger btn-sm float-right">
-                <i className="fa fa-trash-o" />
-              </button>
-              <button
-                className="btn btn-outline-success btn-sm float-right">
-                <i className="fa fa-plus-circle" />
-              </button>
-              <button
-                className="btn btn-outline-warning btn-sm float-right">
-                <i className="fa fa-minus-circle" />
-              </button>
-            </td>
-          </tr>
+          {items.map(renderRow)}
         </tbody>
-        </table>
+      </table>
 
       <div className="total">
-        Total: $ total
+        Total: ${total}
       </div>
     </div>
   );
