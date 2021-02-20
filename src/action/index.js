@@ -7,6 +7,13 @@ const booksLoaded = (newBooks) => {
   };
 };
 
+const booksRequested = () => {
+  return {
+    type: actionTypes.BOOKS_REQUESTED,
+  }
+};
+
 export {
-  booksLoaded
+  booksLoaded,
+  booksRequested,
 };
