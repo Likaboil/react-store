@@ -7,7 +7,7 @@ const CartTable = ({ items, total,
                       onIncrease, onDecrease, onDelete}) => {
 
   const renderRow = (item, idx) => {
-    const {id, count, title, price} = item;
+    const {id, count, title, price, total} = item;
 
     return (
       <tr key={id}>
@@ -16,6 +16,7 @@ const CartTable = ({ items, total,
         <td>{title}</td>
         <td>{count}</td>
         <td>{price}</td>
+        <td>{total}</td>
 
         <td>
           <button
@@ -52,6 +53,7 @@ const CartTable = ({ items, total,
             <th>Item</th>
             <th>Count</th>
             <th>Price</th>
+            <th>Total</th>
             <th>Action</th>
           </tr>
         </thead>
