@@ -7,6 +7,7 @@ import {withBookstoreService} from '../../../hoc';
 import { booksLoaded } from '../../../../action';
 import { bindActionCreators } from 'redux';
 import { compose } from '../../../../utils';
+import Spinner from '../../../spinner';
 
 
 class BookList  extends Component {
@@ -23,7 +24,11 @@ class BookList  extends Component {
 
   render() {
 
-    const { books } = this.props;
+    const { books, loading } = this.props;
+
+    if (loading) {
+      return <Spinner />
+    }
 
     return (
       <ul className="list-group list-group-flush">
@@ -45,7 +50,8 @@ class BookList  extends Component {
 // describes what data the component will receive from redax
 const mapStateToProps = (state) => {
   return {
-    books: state.books
+    books: state.books,
+    loading: state.loading,
   };
 }
 
