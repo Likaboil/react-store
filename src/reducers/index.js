@@ -6,6 +6,40 @@ const initialState = {
   orderTotal: 0
 };
 
+const updateCartItems = (cartItems, item, idx) => {
+
+  if (idx === -1) {
+    return [
+      ...cartItems,
+      item
+    ];
+  };
+
+  return [
+    ...cartItems.slice(0, idx),
+    item,
+    ...cartItems.slice(idx + 1)
+  ];
+};
+
+const updateCartItem = (book, item = {}) => {
+
+  const {
+    id = book.id,
+    title = book.title,
+    price = book.price,
+    count = 0,
+    total = 0 } = item;
+
+  return {
+    id,
+    title,
+    count: count + 1,
+    price: price,
+    total: total + price
+  };
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'FETCH_BOOKS_REQUEST':
@@ -35,45 +69,12 @@ const reducer = (state = initialState, action) => {
       const itemIdx = state.cartItems.findIndex(({id}) => id === bookId);
       const item = state.cartItems[itemIdx];
 
-      let newItem;
+      const newItem = updateCartItem(book, item);
 
-      if (item) {
-        newItem = {
-          ...item,
-          count: ++item.count,
-          total: book.price + item.price,
-        }
-      } else {
-        newItem = {
-          id: bookId,
-          title: book.title,
-          count: 1,
-          price: book.price,
-          total: book.price,
-         }
+      return {
+        ...state,
+        cartItems: updateCartItems(state.cartItems, newItem, itemIdx)
       };
-
-      if (itemIdx < 0) {
-        return {
-          ...state,
-          cartItems: [
-            ...state.cartItems,
-            newItem
-          ],
-          orderTotal: (state.orderTotal + book.price)
-        };
-      } else {
-        return {
-          ...state,
-          cartItems: [
-            ...state.cartItems.slice(0, itemIdx),
-            newItem,
-            ...state.cartItems.slice(itemIdx + 1)
-          ],
-          orderTotal: (state.orderTotal + book.price)
-        };
-      }
-
 
     default:
       return state;
