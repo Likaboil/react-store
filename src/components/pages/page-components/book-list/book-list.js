@@ -4,6 +4,7 @@ import './book-list.css';
 
 import BookListItem from '../book-list-item';
 import {withBookstoreService} from '../../../hoc';
+import { booksLoaded } from '../index';
 
 class BookList  extends Component {
 
@@ -45,14 +46,12 @@ const mapStateToProps = (state) => {
 }
 
 // dispatch data changes
+// booksLoaded is action-creator from 'src/action/
 
 const mapDispatchToProps = (dispatch) => {
   return {
     booksLoaded: (newBoks) => {
-      dispatch({
-        type: 'BOOKS_LOADED',
-        payload: newBoks,
-      });
+      dispatch(booksLoaded(newBoks));
     }
   };
 }
