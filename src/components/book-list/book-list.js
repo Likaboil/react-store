@@ -4,7 +4,7 @@ import './book-list.css';
 
 import BookListItem from '../book-list-item';
 import { withBookstoreService } from '../hoc';
-import { fetchBooks } from '../../action';
+import { fetchBooks, bookAddedToCart } from '../../action';
 import { bindActionCreators } from 'redux';
 import { compose } from '../../utils';
 import Spinner from '../spinner';
@@ -71,7 +71,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
   return {
     fetchBooks: fetchBooks(bookstoreService, dispatch),
-    odAddedtoCart: (id) => console.log(`Added to Cart ${id}`)
+    odAddedtoCart: (id) => dispatch(bookAddedToCart(id))
   }
 };
 

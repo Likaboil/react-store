@@ -44,6 +44,10 @@ const reducer = (state = initialState, action) => {
         loading: false,
         error: action.payload,
       };
+    case 'BOOKS_ADDED_TO_CART':
+      console.log(action.type)
+      return {
+        ...state}
 
     default:
       return state;

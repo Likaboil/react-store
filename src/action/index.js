@@ -20,6 +20,12 @@ const booksError = (error) => {
   }
 };
 
+const bookAddedToCart = (bookId) => {
+  return {
+    type: actionTypes.BOOKS_ADDED_TO_CART,
+    payload: bookId
+  }
+}
 const fetchBooks = (bookstoreService, dispatch) => () => {
 
   dispatch(booksRequested()); // show spinner until get data
@@ -31,4 +37,5 @@ const fetchBooks = (bookstoreService, dispatch) => () => {
 
 export {
   fetchBooks,
+  bookAddedToCart
 };
