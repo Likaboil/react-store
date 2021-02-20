@@ -4,31 +4,46 @@ import './book-list.css';
 
 import BookListItem from '../book-list-item';
 import {withBookstoreService} from '../../../hoc';
-import { booksLoaded, booksRequested } from '../../../../action';
+import {
+  booksLoaded,
+  booksRequested,
+  booksError
+} from '../../../../action';
 import { bindActionCreators } from 'redux';
 import { compose } from '../../../../utils';
 import Spinner from '../../../spinner';
+import ErrorIndicator from '../../../error-indicator';
 
 
 class BookList  extends Component {
 
   componentDidMount() {
     // recieve data
-    const {bookstoreService, booksLoaded, booksRequested} = this.props;
+      const {
+        bookstoreService,
+        booksLoaded,
+        booksRequested,
+        booksError
+      } = this.props;
 
     booksRequested();   // show spinner until get data
 
     bookstoreService.getBooks()
         // dispatch action to store
       .then((data) => booksLoaded(data))
+      .catch((error) => booksError(error));
   }
 
   render() {
-    const { books, loading } = this.props;
+    const {books, loading, error} = this.props;
 
     if (loading) {
-      return <Spinner />
-    }
+      return <Spinner />;
+    };
+
+    if (error) {
+      return <ErrorIndicator />;
+    };
 
     return (
       <ul className="list-group list-group-flush">
@@ -52,6 +67,7 @@ const mapStateToProps = (state) => {
   return {
     books: state.books,
     loading: state.loading,
+    error: state.error
   };
 }
 
@@ -61,7 +77,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     booksLoaded,
-    booksRequested
+    booksRequested,
+    booksError,
   }, dispatch)
 };
 
