@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CartTable } from '../page-components';
+import CartTable from '../../cart-table';
 import ErrorBoundry from '../../error-boundry';
 
 const CartPage = () => {

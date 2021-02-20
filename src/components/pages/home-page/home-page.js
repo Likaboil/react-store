@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BookList } from '../page-components';
+import BookList from '../../book-list';
 import ErrorBoundry from '../../error-boundry';
 
 const HomePage = () => {

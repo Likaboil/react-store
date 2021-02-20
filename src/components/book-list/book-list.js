@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import './book-list.css';
 
 import BookListItem from '../book-list-item';
-import {withBookstoreService} from '../../../hoc';
-import { fetchBooks } from '../../../../action';
+import { withBookstoreService } from '../hoc';
+import { fetchBooks } from '../../action';
 import { bindActionCreators } from 'redux';
-import { compose } from '../../../../utils';
-import Spinner from '../../../spinner';
-import ErrorIndicator from '../../../error-indicator';
+import { compose } from '../../utils';
+import Spinner from '../spinner';
+import ErrorIndicator from '../error-indicator';
 
 
 class BookList  extends Component {

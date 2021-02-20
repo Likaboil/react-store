@@ -1,7 +1,7 @@
 import React from 'react';
 import './book-list-item.css';
 
-import ErrorBoundry from '../../../error-boundry';
+import ErrorBoundry from '../error-boundry';
 
 const BookListItem = ({book}) => {
 
