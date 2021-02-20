@@ -4,8 +4,10 @@ import './book-list.css';
 
 import BookListItem from '../book-list-item';
 import {withBookstoreService} from '../../../hoc';
-import { booksLoaded } from '../index';
+import { booksLoaded } from '../../../../action';
 import { bindActionCreators } from 'redux';
+import { compose } from '../../../../utils';
+
 
 class BookList  extends Component {
 
@@ -55,6 +57,7 @@ const mapDispatchToProps = (dispatch) => {
   }, dispatch)
 };
 
-export default withBookstoreService()(
-            connect(mapStateToProps, mapDispatchToProps)(BookList)
-            );
+export default compose(
+    withBookstoreService(),
+    connect(mapStateToProps, mapDispatchToProps)
+    )(BookList);
