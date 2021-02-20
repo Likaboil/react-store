@@ -10,8 +10,24 @@ import { compose } from '../../utils';
 import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
 
+const BookList = ({books}) => {
+  return (
+    <ul className="list-group list-group-flush">
+      {
+        books.map((book) => {
+          return (
+            <li key={book.id}
+                className="list-group-item">
+              <BookListItem book={book} />
+            </li>
+          );
+        })
+      }
+    </ul>
+  );
+};
 
-class BookList  extends Component {
+class BookListContainer extends Component {
 
   componentDidMount() {
     this.props.fetchBooks();
@@ -28,20 +44,7 @@ class BookList  extends Component {
       return <ErrorIndicator />;
     };
 
-    return (
-      <ul className="list-group list-group-flush">
-        {
-          books.map((book) => {
-            return (
-              <li key={book.id}
-                  className="list-group-item">
-                <BookListItem book={book}/>
-              </li>
-            );
-          })
-        }
-      </ul>
-    );
+    return <BookList books={books} />
   }
 };
 
@@ -55,7 +58,7 @@ const mapStateToProps = (state) => {
 }
 
 // dispatch data changes
-// booksLoaded, booksRequested is action-creator from 'src/action/
+// fetchBooks is action-creator from 'src/action/
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   const {bookstoreService} = ownProps;
@@ -68,4 +71,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 export default compose(
     withBookstoreService(),
     connect(mapStateToProps, mapDispatchToProps)
-    )(BookList);
+    )(BookListContainer);
