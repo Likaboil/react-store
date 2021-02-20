@@ -5,6 +5,7 @@ import './book-list.css';
 import BookListItem from '../book-list-item';
 import {withBookstoreService} from '../../../hoc';
 import { booksLoaded } from '../index';
+import { bindActionCreators } from 'redux';
 
 class BookList  extends Component {
 
@@ -49,12 +50,10 @@ const mapStateToProps = (state) => {
 // booksLoaded is action-creator from 'src/action/
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    booksLoaded: (newBoks) => {
-      dispatch(booksLoaded(newBoks));
-    }
-  };
-}
+  return bindActionCreators({
+    booksLoaded
+  }, dispatch)
+};
 
 export default withBookstoreService()(
             connect(mapStateToProps, mapDispatchToProps)(BookList)
