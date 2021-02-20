@@ -2,20 +2,20 @@ import actionTypes from './action-types';
 
 const booksLoaded = (newBooks) => {
   return {
-    type: actionTypes.BOOKS_LOADED,
+    type: actionTypes.FETCH_BOOKS_SUCCESS,
     payload: newBooks
   };
 };
 
 const booksRequested = () => {
   return {
-    type: actionTypes.BOOKS_REQUESTED,
+    type: actionTypes.FETCH_BOOKS_REQUEST,
   }
 };
 
 const booksError = (error) => {
   return {
-    type: actionTypes.BOOKS_ERROR,
+    type: actionTypes.FETCH_BOOKS_FAILURE,
     payload: error
   }
 };
