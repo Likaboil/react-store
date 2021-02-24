@@ -5,7 +5,6 @@ import './book-list.css';
 import BookListItem from '../book-list-item';
 import { withBookstoreService } from '../hoc';
 import { fetchBooks, bookAddedToCart } from '../../action';
-import { bindActionCreators } from 'redux';
 import { compose } from '../../utils';
 import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
@@ -56,12 +55,13 @@ class BookListContainer extends Component {
 
 // describes what data the component will receive from redax
 const mapStateToProps = (state) => {
+  const { books, loading, error } = state.bookList;
   return {
-    books: state.books,
-    loading: state.loading,
-    error: state.error
+    books: books,
+    loading: loading,
+    error: error
   };
-}
+};
 
 // dispatch data changes
 // fetchBooks is action-creator from 'src/action/

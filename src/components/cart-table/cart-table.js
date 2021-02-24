@@ -9,7 +9,7 @@ import {
   allBooksRemovedFromCart
 } from '../../action';
 
-const CartTable = ({ items, total,
+const CartTable = ({ items, orderTotal,
                       onIncrease, onDecrease, onDelete}) => {
 
   const renderRow = (item, idx) => {
@@ -70,16 +70,18 @@ const CartTable = ({ items, total,
       </table>
 
       <div className="total">
-        Total: ${total}
+        Total: ${orderTotal}
       </div>
     </div>
   );
 };
 
 const mapStateToProps = (state) => {
+  const { cartItems, orderTotal } = state.cartList;
+
   return {
-    items: state.cartItems,
-    total: state.orderTotal,
+    items: cartItems,
+    total: orderTotal
   };
 };
 
