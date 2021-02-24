@@ -1,9 +1,9 @@
 import React from 'react';
 import './book-list-item.css';
 
-import ErrorBoundry from '../../../error-boundry';
+import ErrorBoundry from '../error-boundry';
 
-const BookListItem = ({book}) => {
+const BookListItem = ({book, odAddedtoCart}) => {
 
   const {title, author, price, coverImage} = book;
 
@@ -18,7 +18,9 @@ const BookListItem = ({book}) => {
           <div className="book-author">{author}</div>
           <div className="book-price">${price}</div>
           <button
-            className="btn btn-info add-to-cart">
+              onClick={odAddedtoCart}
+              className="btn btn-info add-to-cart"
+          >
             Add to cart
           </button>
         </div>

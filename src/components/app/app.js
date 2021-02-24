@@ -3,6 +3,8 @@ import  {
   Route,
   Switch
 } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 
 import './app.css';
 
@@ -12,10 +14,10 @@ import {
  CartPage
 } from '../pages';
 
-const App = () => {
+const App = ({numItems, total}) => {
   return (
     <div>
-      <Header currentPage={1} onPageChange={() => 2}/>
+      <Header numItems={numItems} total={total}/>
       <main>
         <h1 className="visually-hidden">Book-Store</h1>
         <Switch>
@@ -29,4 +31,13 @@ const App = () => {
   );
 };
 
-export default App;
+const mapStateToProps = (state) => {
+  const { cartItems, orderTotal } = state.cartList;
+
+  return {
+    numItems: cartItems.reduce((totalCount, {count}) => totalCount + count, 0),
+    total: orderTotal
+  };
+}
+
+export default connect(mapStateToProps)(App);

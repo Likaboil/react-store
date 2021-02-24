@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './header.css';
 
 import ErrorBoundry from '../error-boundry';
-const Header = () => {
+const Header = ( {numItems, total }) => {
 
   return (
     <ErrorBoundry>
@@ -19,7 +19,7 @@ const Header = () => {
                   className="nav-link">
               <span className="shopping-cart text-dark">
                 <i className="cart-icon fa fa-shopping-cart" />
-                  Cart
+                {numItems} items (${total})
               </span>
             </Link>
           </div>
