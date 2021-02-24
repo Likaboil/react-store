@@ -8,6 +8,13 @@ const initialState = {
 
 const updateCartItems = (cartItems, item, idx) => {
 
+  if (item.count === 0) {
+    return [
+      ...cartItems.slice(0, idx),
+      ...cartItems.slice(idx + 1)
+    ];
+  };
+
   if (idx === -1) {
     return [
       ...cartItems,
@@ -81,6 +88,9 @@ const reducer = (state = initialState, action) => {
       return updateOrder(state, action.payload, 1);
     case 'BOOK_REMOVES_FROM_CART':
       return updateOrder(state, action.payload, -1);
+    case 'ALL_BOOKS_REMOVES_FROM_CART':
+      const item = state.cartItems.find(({id}) =>id === action.payload);
+      return updateOrder(state, action.payload, -item.count);
 
     default:
       return state;
