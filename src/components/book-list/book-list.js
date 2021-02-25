@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import './book-list.css';
 
@@ -28,6 +29,11 @@ const BookList = ({ books, odAddedtoCart }) => {
       }
     </ul>
   );
+};
+
+BookList.propTypes = {
+  odAddedtoCart: PropTypes.func,
+  books: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 class BookListContainer extends Component {

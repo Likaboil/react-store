@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import './cart-table.css';
 
@@ -74,6 +75,14 @@ const CartTable = ({ items, orderTotal,
       </div>
     </div>
   );
+};
+
+CartTable.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
+  orderTotal: PropTypes.number,
+  onIncrease: PropTypes.func,
+  onDelete: PropTypes.func,
+  onDecrease: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {

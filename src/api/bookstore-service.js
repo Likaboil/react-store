@@ -1,6 +1,14 @@
+import PropTypes from 'prop-types';
+
 export default class BookstoreService {
 
-  delayInterval = 700
+  static defaultProps = {
+    delayInterval: 700,
+  }
+
+  static propTypes = {
+    delayInterval: PropTypes.number
+  }
 
   data = [
     {

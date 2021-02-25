@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import './header.css';
 
@@ -29,6 +30,11 @@ const Header = ( {numItems, total }) => {
       </header>
     </ErrorBoundry>
   );
+};
+
+Header.propTypes = {
+  numItems: PropTypes.number,
+  total: PropTypes.number,
 };
 
 export default Header;

@@ -4,7 +4,7 @@ import  {
   Switch
 } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import PropTypes from 'prop-types';
 
 import './app.css';
 
@@ -29,6 +29,11 @@ const App = ({numItems, total}) => {
       </main>
     </div>
   );
+};
+
+App.propTypes = {
+  numItems: PropTypes.number,
+  total: PropTypes.number,
 };
 
 const mapStateToProps = (state) => {
