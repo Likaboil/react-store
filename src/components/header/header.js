@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 import './header.css';
 
 import ErrorBoundry from '../error-boundry';
+
 const Header = ( {numItems, total }) => {
 
   return (
@@ -26,7 +28,7 @@ const Header = ( {numItems, total }) => {
         </nav>
       </header>
     </ErrorBoundry>
-  )
-}
+  );
+};
 
 export default Header;
