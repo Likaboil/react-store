@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import './book-list-item.css';
 
 import ErrorBoundry from '../error-boundry';
@@ -27,6 +29,11 @@ const BookListItem = ({book, odAddedtoCart}) => {
       </div>
     </ErrorBoundry>
   )
+};
+
+BookListItem.propTypes = {
+  odAddedtoCart: PropTypes.func,
+  book: PropTypes.object.isRequired,
 };
 
 export default BookListItem;

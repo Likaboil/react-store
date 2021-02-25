@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import './header.css';
 
 import ErrorBoundry from '../error-boundry';
+
 const Header = ( {numItems, total }) => {
 
   return (
@@ -26,7 +29,12 @@ const Header = ( {numItems, total }) => {
         </nav>
       </header>
     </ErrorBoundry>
-  )
-}
+  );
+};
+
+Header.propTypes = {
+  numItems: PropTypes.number,
+  total: PropTypes.number,
+};
 
 export default Header;

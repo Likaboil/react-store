@@ -1,5 +1,4 @@
-
-// funcs array of functions
+// func array of functions
 
 const compose = (...func) => (component) => {
 

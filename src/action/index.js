@@ -10,21 +10,21 @@ const booksLoaded = (newBooks) => {
 const booksRequested = () => {
   return {
     type: actionTypes.FETCH_BOOKS_REQUEST,
-  }
+  };
 };
 
 const booksError = (error) => {
   return {
     type: actionTypes.FETCH_BOOKS_FAILURE,
     payload: error
-  }
+  };
 };
 
 const bookAddedToCart = (bookId) => {
   return {
     type: actionTypes.BOOKS_ADDED_TO_CART,
     payload: bookId
-  }
+  };
 };
 
 const fetchBooks = (bookstoreService, dispatch) => () => {

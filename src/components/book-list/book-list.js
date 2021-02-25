@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 import './book-list.css';
 
 import BookListItem from '../book-list-item';
@@ -9,7 +11,7 @@ import { compose } from '../../utils';
 import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
 
-const BookList = ({books, odAddedtoCart}) => {
+const BookList = ({ books, odAddedtoCart }) => {
   return (
     <ul className="list-group list-group-flush">
       {
@@ -27,6 +29,11 @@ const BookList = ({books, odAddedtoCart}) => {
       }
     </ul>
   );
+};
+
+BookList.propTypes = {
+  odAddedtoCart: PropTypes.func,
+  books: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 class BookListContainer extends Component {
@@ -67,7 +74,7 @@ const mapStateToProps = (state) => {
 // fetchBooks is action-creator from 'src/action/
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  const {bookstoreService} = ownProps;
+  const { bookstoreService } = ownProps;
 
   return {
     fetchBooks: fetchBooks(bookstoreService, dispatch),
