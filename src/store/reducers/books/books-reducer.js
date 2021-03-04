@@ -1,4 +1,4 @@
-const updateBookList = (state, action) => {
+const bookReducer = (state, action) => {
   if (!state) {
     return {
       books: [],
@@ -20,7 +20,7 @@ const updateBookList = (state, action) => {
         loading: false,
         error: null,
       };
-    case 'FETCH_BOOKS_FAILURE':
+    case 'FETCH_BOOKS_ERROR':
       return {
         books: [],
         loading: false,
@@ -31,4 +31,4 @@ const updateBookList = (state, action) => {
     };
 };
 
-export default updateBookList;
+export default bookReducer;

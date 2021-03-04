@@ -6,7 +6,8 @@ import './book-list.css';
 
 import BookListItem from '../book-list-item';
 import { withBookstoreService } from '../hoc';
-import { fetchBooks, bookAddedToCart } from '../../action';
+import { booksOperations } from '../../store/reducers/books/';
+import { bookAddedToCart } from '../../store/reducers/cart/cart-actions';
 import { compose } from '../../utils';
 import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
@@ -71,13 +72,13 @@ const mapStateToProps = (state) => {
 };
 
 // dispatch data changes
-// fetchBooks is action-creator from 'src/action/
+// booksOperations is action-operations
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   const { bookstoreService } = ownProps;
 
   return {
-    fetchBooks: fetchBooks(bookstoreService, dispatch),
+    fetchBooks: booksOperations(bookstoreService, dispatch),
     odAddedtoCart: (id) => dispatch(bookAddedToCart(id))
   }
 };
