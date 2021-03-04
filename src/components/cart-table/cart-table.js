@@ -8,7 +8,7 @@ import {
   bookAddedToCart,
   bookRemovedFromCart,
   allBooksRemovedFromCart
-} from '../../action';
+} from '../../store/reducers/cart/cart-actions';
 
 const CartTable = ({ items, orderTotal,
                       onIncrease, onDecrease, onDelete}) => {
