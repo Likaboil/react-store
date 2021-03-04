@@ -4,7 +4,7 @@ import {
   booksError
 } from './books-action';
 
-const fetchBooks = (bookstoreService, dispatch) => () => {
+const fetchBooks = (bookstoreService) => () => (dispatch) => {
 
   dispatch(booksRequested()); // show spinner until get data
 
