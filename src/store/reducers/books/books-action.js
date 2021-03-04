@@ -1,24 +1,9 @@
 import * as BooksTypes from './books-types';
+import { makeActionCreator } from '../../../lib';
 
-const booksLoaded = (newBooks) => {
-  return {
-    type: BooksTypes.FETCH_BOOKS_SUCCESS,
-    payload: newBooks
-  };
-};
-
-const booksRequested = () => {
-  return {
-    type: BooksTypes.FETCH_BOOKS_REQUEST,
-  };
-};
-
-const booksError = (error) => {
-  return {
-    type: BooksTypes.FETCH_BOOKS_ERROR,
-    payload: error
-  };
-};
+const booksLoaded = makeActionCreator(BooksTypes.FETCH_BOOKS_SUCCESS);
+const booksRequested = makeActionCreator(BooksTypes.FETCH_BOOKS_REQUEST);
+const booksError = makeActionCreator(BooksTypes.FETCH_BOOKS_ERROR);
 
 export {
   booksLoaded,
