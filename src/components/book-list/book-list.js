@@ -8,7 +8,7 @@ import BookListItem from '../book-list-item';
 import { withBookstoreService } from '../hoc';
 import { booksOperations } from '../../store/reducers/books/';
 import { bookAddedToCart } from '../../store/reducers/cart/cart-actions';
-import { compose } from '../../utils';
+import { compose } from '../../lib';
 import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
 
