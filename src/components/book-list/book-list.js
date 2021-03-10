@@ -14,7 +14,7 @@ const BookList = ({ books, odAddedtoCart }) => {
                 className="list-group-item">
               <BookListItem
                 book={book}
-                odAddedtoCart={() => odAddedtoCart(book.id)}
+                odAddedtoCart={() => odAddedtoCart(book)}
               />
             </li>
           );

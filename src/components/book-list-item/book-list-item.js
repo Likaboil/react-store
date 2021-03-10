@@ -5,9 +5,9 @@ import './book-list-item.css';
 
 import ErrorBoundry from '../error-boundry';
 
-const BookListItem = ({book, odAddedtoCart}) => {
+const BookListItem = ({ book, odAddedtoCart }) => {
 
-  const {title, author, price, coverImage} = book;
+  const { title, author, price, coverImage } = book;
 
   return (
     <ErrorBoundry>

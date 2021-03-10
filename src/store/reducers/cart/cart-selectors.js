@@ -1,3 +1,16 @@
+import { createSelector } from 'reselect';
+import NameSpace from '../name-space';
+
+const NAME_SPACE = NameSpace.CART;
+
+const getCartItems = (state) =>  state[NAME_SPACE].cartItems;
+const getCartTotal = (state) => state[NAME_SPACE].orderTotal;
+
+const getCartItemsAmount = createSelector(
+  getCartItems,
+  (cartItems) => cartItems.reduce((totalCount, {count}) => totalCount + count, 0)
+);
+
 const updateCartItems = (cartItems, item, idx) => {
 
   if (item.count === 0) {
@@ -40,12 +53,10 @@ const updateCartItem = (book, item = {}, quantity) => {
   };
 };
 
-const updateOrder = (state, bookId, quantity) => {
-  const { cartItems }  = state.cartList;
-  const { books } = state.bookList;
+const updateOrder = (state, book, quantity) => {
+  const { cartItems } = state;
 
-  const book = books.find((book) => book.id === bookId);
-  const itemIdx = cartItems.findIndex(({id}) => id === bookId);
+  const itemIdx = cartItems.findIndex(({id}) => id === book.id);
   const item = cartItems[itemIdx];
 
   const newItem = updateCartItem(book, item, quantity);
@@ -57,4 +68,10 @@ const updateOrder = (state, bookId, quantity) => {
   };
 };
 
+
+export {
+  getCartItems,
+  getCartTotal,
+  getCartItemsAmount
+};
 export default updateOrder;
