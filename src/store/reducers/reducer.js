@@ -1,11 +1,9 @@
+import { combineReducers } from 'redux';
 import bookReducer from './books/books-reducer';
 import cartReducer from './cart';
+import NameSpace from './name-space';
 
-const reducer = (state, action) => {
-  return {
-    bookList: bookReducer(state, action),
-    cartList: cartReducer(state, action)
-  };
-};
-
-export default reducer;
+export default combineReducers({
+  [NameSpace.BOOKS]: bookReducer,
+  [NameSpace.CART]: cartReducer
+});

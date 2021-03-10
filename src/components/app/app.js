@@ -1,8 +1,5 @@
 import React from 'react';
-import  {
-  Route,
-  Switch
-} from 'react-router-dom';
+import  { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -11,13 +8,17 @@ import './app.css';
 import Header from '../header';
 import {
   HomePage,
- CartPage
+  CartPage
 } from '../pages';
+import {
+  getCartItemsAmount,
+  getCartTotal
+} from '../../store/reducers/cart/cart-selectors';
 
-const App = ({numItems, total}) => {
+const App = ({ amountItems, total }) => {
   return (
     <div>
-      <Header numItems={numItems} total={total}/>
+      <Header amountItems={amountItems} total={total}/>
       <main>
         <h1 className="visually-hidden">Book-Store</h1>
         <Switch>
@@ -32,16 +33,14 @@ const App = ({numItems, total}) => {
 };
 
 App.propTypes = {
-  numItems: PropTypes.number,
+  amountItems: PropTypes.number,
   total: PropTypes.number,
 };
 
 const mapStateToProps = (state) => {
-  const { cartItems, orderTotal } = state.cartList;
-
   return {
-    numItems: cartItems.reduce((totalCount, {count}) => totalCount + count, 0),
-    total: orderTotal
+    amountItems: getCartItemsAmount(state),
+    total: getCartTotal(state)
   };
 }
 

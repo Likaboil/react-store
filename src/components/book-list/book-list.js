@@ -1,17 +1,8 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React from 'react';
 import PropTypes from 'prop-types';
-
 import './book-list.css';
 
 import BookListItem from '../book-list-item';
-import { withBookstoreService } from '../hoc';
-import { booksOperations } from '../../store/reducers/books/';
-import { bookAddedToCart } from '../../store/reducers/cart/cart-actions';
-import { compose } from '../../lib';
-import Spinner from '../spinner';
-import ErrorIndicator from '../error-indicator';
 
 const BookList = ({ books, odAddedtoCart }) => {
   return (
@@ -23,7 +14,7 @@ const BookList = ({ books, odAddedtoCart }) => {
                 className="list-group-item">
               <BookListItem
                 book={book}
-                odAddedtoCart={() => odAddedtoCart(book.id)}
+                odAddedtoCart={() => odAddedtoCart(book)}
               />
             </li>
           );
@@ -38,54 +29,4 @@ BookList.propTypes = {
   books: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-class BookListContainer extends Component {
-
-  componentDidMount() {
-    this.props.fetchBooks();
-  }
-
-  render() {
-    const {books, loading, error, odAddedtoCart} = this.props;
-
-    if (loading) {
-      return <Spinner />;
-    };
-
-    if (error) {
-      return <ErrorIndicator />;
-    };
-
-    return <BookList
-              books={books}
-              odAddedtoCart={odAddedtoCart}
-           />
-  }
-};
-
-// describes what data the component will receive from redax
-const mapStateToProps = (state) => {
-  const { books, loading, error } = state.bookList;
-  return {
-    books: books,
-    loading: loading,
-    error: error
-  };
-};
-
-// dispatch data changes
-// booksOperations is action-operations
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-  const { bookstoreService } = ownProps;
-
-  return bindActionCreators(
-    {
-      fetchBooks: booksOperations(bookstoreService),
-      odAddedtoCart: bookAddedToCart
-  }, dispatch)
-};
-
-export default compose(
-    withBookstoreService(),
-    connect(mapStateToProps, mapDispatchToProps)
-    )(BookListContainer);
+export default BookList;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import BookList from '../../book-list';
+import BookListContainer from '../../../containers';
 import ErrorBoundry from '../../error-boundry';
 
 const HomePage = () => {
@@ -9,7 +9,7 @@ const HomePage = () => {
     <ErrorBoundry>
       <div className="container-md">
         <h2 className="visually-hidden">HomePage</h2>
-        <BookList />
+        <BookListContainer />
       </div>
     </ErrorBoundry>
   );
