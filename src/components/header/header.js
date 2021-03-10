@@ -6,7 +6,7 @@ import './header.css';
 
 import ErrorBoundry from '../error-boundry';
 
-const Header = ( {numItems, total }) => {
+const Header = ({ amountItems, total }) => {
 
   return (
     <ErrorBoundry>
@@ -22,7 +22,7 @@ const Header = ( {numItems, total }) => {
                   className="nav-link">
               <span className="shopping-cart text-dark">
                 <i className="cart-icon fa fa-shopping-cart" />
-                {numItems} items (${total})
+                {amountItems} items (${total})
               </span>
             </Link>
           </div>
@@ -33,7 +33,7 @@ const Header = ( {numItems, total }) => {
 };
 
 Header.propTypes = {
-  numItems: PropTypes.number,
+  amountItems: PropTypes.number,
   total: PropTypes.number,
 };
 

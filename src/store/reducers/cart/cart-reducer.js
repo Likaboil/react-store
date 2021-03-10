@@ -1,24 +1,22 @@
 import updateOrder from './cart-selectors';
+import * as CartTypes from './cart-types';
 
-const cartReducer = (state, action) => {
-  if (!state) {
-    return {
-      cartItems: [],
-      orderTotal: 0
-    };
-  };
+const initialState = {
+    cartItems: [],
+    orderTotal: 0
+};
 
+const cartReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'BOOKS_ADDED_TO_CART':
+    case CartTypes.BOOKS_ADDED_TO_CART:
       return updateOrder(state, action.payload, 1);
-    case 'BOOK_REMOVES_FROM_CART':
+    case CartTypes.BOOK_REMOVES_FROM_CART:
       return updateOrder(state, action.payload, -1);
-    case 'ALL_BOOKS_REMOVES_FROM_CART':
-      const item = state.cartList.cartItems.find(({id}) =>id === action.payload);
+    case CartTypes.ALL_BOOKS_REMOVES_FROM_CART:
+      const item = state.cartItems.find(({id}) =>id === action.payload);
       return updateOrder(state, action.payload, -item.count);
-
     default:
-      return state.cartList;
+      return state;
   };
 };
 

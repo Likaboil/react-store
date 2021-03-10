@@ -19,7 +19,9 @@ If you need to change the quantity, press the plus or minus button.
 To remove a book from the order, click the "Remove" button.
 
 Sometimes server throw an error and you see "Something has gone terribly wrong!".
-Try switch between home and cart-pages or reload app.
+Try switch between home- and cart-pages or reload app.
+
+Check it yourself  [React-Store](https://react-store-ls.web.app)
 
 About the project.
 -----------------------------------
@@ -28,9 +30,14 @@ This project was created for learning React with Redux according to the course o
 
 Data is received from a mock server.
 
-Used functional and class components (with lifecycle methods), custom HOCs.
+Used functional and class components, custom HOCs.
 To change pages is used React-router.
-All project manage by Redax with own reducer and actions.
+All project manage by Redux with own reducer and actions.
+
+Improved in training project by myself:
+- the store structure contains reducers. Each of them contains own actions, actions-types, selectors;
+- using reselect to receive data from a parallel state;
+- the project structure contains containers with logic, components with a view, a library of project utilities.
 
 Structure
 -----------------------------------
@@ -40,20 +47,22 @@ Structure
 * src
     * api
       * Test-swapi return mock-data
-    * actions
-      * Actions-type and actions that are used in the reducer
     * components
       * Error-boundry, Error-button, Error-indicator and Spinner are used in case error or loading
       * BookList, BookListItem, Cart-table, Hoc is elements to create main components - pages
       * Pages includes HomePage and CartPage
-      * App - the main page in app
+      * App - the main component in app
       * Bookstore-context use to create App-Context
-    * reducer
-      * It is divided into two logics - application status and state change
+    * containers
     * store
-      * Simple store for project management
-    * utils
-      * Contains compose-util
+      * reducer
+        * actions
+        * types of action
+        * selectors  - to work with state-data
+        * operations - middleware
+        * local-reducer - to manage local-state
+    * lib
+      * Contains project-utils
 
 Tools
 -----------------------------------
@@ -62,6 +71,7 @@ Tools
 * React-router-dom
 * Redux
 * React-redux
+* Reselect
 * Prop-types
 * HTML 5
 * Css 3

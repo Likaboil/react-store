@@ -1,33 +1,33 @@
-const bookReducer = (state, action) => {
-  if (!state) {
-    return {
-      books: [],
-      loading: true,
-      error: null,
-    };
-  };
+import * as BooksTypes from './books-types';
 
+const initialState = {
+    books: [],
+    loading: true,
+    error: null,
+}
+
+const bookReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'FETCH_BOOKS_REQUEST':
+    case BooksTypes.FETCH_BOOKS_REQUEST:
       return {
         books: [],
         loading: true,
         error: null,
       };
-    case 'FETCH_BOOKS_SUCCESS':
+    case BooksTypes.FETCH_BOOKS_SUCCESS:
       return {
         books: action.payload,
         loading: false,
         error: null,
       };
-    case 'FETCH_BOOKS_ERROR':
+    case BooksTypes.FETCH_BOOKS_ERROR:
       return {
         books: [],
         loading: false,
         error: action.payload,
       };
     default:
-      return state.bookList;
+      return state;
     };
 };
 
