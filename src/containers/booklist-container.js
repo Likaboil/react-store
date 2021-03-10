@@ -9,6 +9,11 @@ import { compose } from '../lib';
 import Spinner from '../components/spinner';
 import ErrorIndicator from '../components/error-indicator';
 import BookList from '../components/book-list';
+import {
+  getBooks,
+  getBooksLoading,
+  getBooksError
+} from '../store/reducers/books/books-selectors';
 
 class BookListContainer extends Component {
 
@@ -36,12 +41,11 @@ class BookListContainer extends Component {
 
 // describes what data the component will receive from redax
 const mapStateToProps = (state) => {
-  const {books, loading, error } = state.bookList;
 
   return {
-    books: books,
-    loading: loading,
-    error: error
+    books: getBooks(state),
+    loading: getBooksLoading(state),
+    error: getBooksError(state)
   };
 };
 
