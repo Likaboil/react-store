@@ -1,7 +1,5 @@
 import React from 'react';
 import  { Route, Switch } from 'react-router-dom';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import './app.css';
 
@@ -10,15 +8,11 @@ import {
   HomePage,
   CartPage
 } from '../components/pages';
-import {
-  getCartItemsAmount,
-  getCartTotal
-} from '../store/reducers/cart/cart-selectors';
 
-const App = ({ amountItems, total }) => {
+const App = () => {
   return (
     <div>
-      <Header amountItems={amountItems} total={total}/>
+      <Header />
       <main>
         <h1 className="visually-hidden">Book-Store</h1>
         <Switch>
@@ -32,16 +26,4 @@ const App = ({ amountItems, total }) => {
   );
 };
 
-App.propTypes = {
-  amountItems: PropTypes.number,
-  total: PropTypes.number,
-};
-
-const mapStateToProps = (state) => {
-  return {
-    amountItems: getCartItemsAmount(state),
-    total: getCartTotal(state)
-  };
-}
-
-export default connect(mapStateToProps)(App);
+export default App;

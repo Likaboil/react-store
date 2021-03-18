@@ -1,10 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import './header.css';
 
 import ErrorBoundry from '../error-boundry';
+import {
+  getCartItemsAmount,
+  getCartTotal
+} from '../../store/reducers/cart/cart-selectors';
 
 const Header = ({ amountItems, total }) => {
 
@@ -37,4 +42,11 @@ Header.propTypes = {
   total: PropTypes.number,
 };
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    amountItems: getCartItemsAmount(state),
+    total: getCartTotal(state)
+  };
+};
+
+export default connect(mapStateToProps)(Header);
