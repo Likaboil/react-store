@@ -1,8 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './book-list.css';
 
-import BookListItem from '../book-list-item';
+import BookCard from '../book-card';
 
 const BookList = ({ books, odAddedtoCart }) => {
   return (
@@ -12,7 +11,7 @@ const BookList = ({ books, odAddedtoCart }) => {
           return (
             <li key={book.id}
                 className="list-group-item">
-              <BookListItem
+              <BookCard
                 book={book}
                 odAddedtoCart={() => odAddedtoCart(book)}
               />
@@ -22,11 +21,6 @@ const BookList = ({ books, odAddedtoCart }) => {
       }
     </ul>
   );
-};
-
-BookList.propTypes = {
-  odAddedtoCart: PropTypes.func,
-  books: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default BookList;
