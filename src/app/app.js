@@ -7,7 +7,7 @@ import Header from '../components/header';
 import {
   HomePage,
   CartPage
-} from '../components/pages';
+} from '../pages';
 
 const App = () => {
   return (
