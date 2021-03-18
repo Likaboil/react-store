@@ -5,15 +5,15 @@ import PropTypes from 'prop-types';
 
 import './app.css';
 
-import Header from '../header';
+import Header from '../components/header';
 import {
   HomePage,
   CartPage
-} from '../pages';
+} from '../components/pages';
 import {
   getCartItemsAmount,
   getCartTotal
-} from '../../store/reducers/cart/cart-selectors';
+} from '../store/reducers/cart/cart-selectors';
 
 const App = ({ amountItems, total }) => {
   return (

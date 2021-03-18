@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import App from './components/app';
+import App from './app';
 import BookstoreService from './api';
 import { BookstoreServiceProvider } from './components/bookstore-context';
 import ErrorBoundry from './components/error-boundry';
