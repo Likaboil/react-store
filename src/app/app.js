@@ -1,5 +1,5 @@
 import React from 'react';
-import  { Route, Switch } from 'react-router-dom';
+import  { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import './app.css';
 
@@ -11,7 +11,7 @@ import {
 
 const App = () => {
   return (
-    <div>
+    <Router>
       <Header />
       <main>
         <h1 className="visually-hidden">Book-Store</h1>
@@ -22,7 +22,7 @@ const App = () => {
 
         </Switch>
       </main>
-    </div>
+    </Router>
   );
 };
 
