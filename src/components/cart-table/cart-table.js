@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import './cart-table.css';
 
@@ -13,45 +12,10 @@ import {
   getCartItems,
   getCartTotal
 } from '../../store/reducers/cart/cart-selectors';
+import Row from './row';
 
-const CartTable = ({ items, orderTotal,
-                      onIncrease, onDecrease, onDelete}) => {
-
-  const renderRow = (item, idx) => {
-    const {id, count, title, price, total} = item;
-
-    return (
-      <tr key={id}>
-
-        <td>{++idx}</td>
-        <td>{title}</td>
-        <td>{count}</td>
-        <td>{price}</td>
-        <td>{total}</td>
-
-        <td>
-          <button
-              onClick = {() => onIncrease(item)}
-              className="btn btn-outline-success btn-sm float-right"
-          >
-            <i className="fa fa-plus-circle" />
-          </button>
-          <button
-              onClick = {() => onDecrease(item)}
-              className="btn btn-outline-warning btn-sm float-right"
-          >
-            <i className="fa fa-minus-circle" />
-          </button>
-          <button
-              onClick = {() => onDelete(item)}
-              className="btn btn-outline-danger btn-sm float-right"
-          >
-            <i className="fa fa-trash-o" />
-          </button>
-        </td>
-      </tr>
-    );
-  };
+const CartTable = (props) => {
+  const { items, orderTotal,  onIncrease, onDecrease, onDelete } = props;
 
   return (
     <div className="shopping-cart-table">
@@ -70,7 +34,16 @@ const CartTable = ({ items, orderTotal,
         </thead>
 
         <tbody>
-          {items.map(renderRow)}
+          {items.map((item, index) => (
+            <Row
+              key={`row-${item.id}`}
+              item={item}
+              index={++index}
+              onIncrease={onIncrease}
+              onDecrease={onDecrease}
+              onDelete={onDelete}
+            />
+          ))}
         </tbody>
       </table>
 
@@ -81,14 +54,6 @@ const CartTable = ({ items, orderTotal,
   );
 };
 
-CartTable.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object).isRequired,
-  orderTotal: PropTypes.number,
-  onIncrease: PropTypes.func,
-  onDelete: PropTypes.func,
-  onDecrease: PropTypes.func,
-};
-
 const mapStateToProps = (state) => {
   return {
     items: getCartItems(state),
@@ -96,10 +61,12 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = {
-  onIncrease: bookAddedToCart,
-  onDecrease: bookRemovedFromCart,
-  onDelete: allBooksRemovedFromCart,
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onIncrease: (item) => dispatch(bookAddedToCart(item)),
+    onDecrease: (item) => dispatch(bookRemovedFromCart(item)),
+    onDelete: (item) => dispatch(allBooksRemovedFromCart(item)),
+  }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartTable);
