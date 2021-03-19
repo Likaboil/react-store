@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const delay = (ms) => new Promise((res) => {setTimeout(res, ms) });
+const delay = (ms) => new Promise((res) => { setTimeout(res, ms) });
 
 export default class BookstoreService {
 
@@ -27,13 +27,13 @@ export default class BookstoreService {
       coverImage: 'https://images-na.ssl-images-amazon.com/images/I/414CRjLjwgL._SX403_BO1,204,203,200_.jpg'}
   ]
 
-    async getBooks() {
-      await delay(this.delayInterval);
+  async getBooks() {
+    await delay(this.delayInterval);
 
-      if (Math.random() > 0.75) {
-        throw new Error('Something is wrong');
-      }
+    if (Math.random() > 0.75) {
+      throw new Error('Something is wrong');
+    }
 
-      return this.data;
+    return this.data;
   }
 };
