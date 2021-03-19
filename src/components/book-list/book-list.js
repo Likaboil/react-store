@@ -3,7 +3,9 @@ import './book-list.css';
 
 import BookCard from '../book-card';
 
-const BookList = ({ books, odAddedtoCart }) => {
+const BookList = (props) => {
+  const { books, onAddtoCart } = props;
+
   return (
     <ul className="list-group list-group-flush">
       {
@@ -13,7 +15,7 @@ const BookList = ({ books, odAddedtoCart }) => {
                 className="list-group-item">
               <BookCard
                 book={book}
-                odAddedtoCart={() => odAddedtoCart(book)}
+                onAddtoCart={() => onAddtoCart(book)}
               />
             </li>
           );

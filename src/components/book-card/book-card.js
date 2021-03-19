@@ -3,13 +3,13 @@ import './book-card.css';
 
 import ErrorBoundry from '../error-boundry';
 
-const BookCard = ({ book, odAddedtoCart }) => {
-
+const BookCard = (props) => {
+  const { book, onAddtoCart } = props;
   const { title, author, price, coverImage } = book;
 
   return (
     <ErrorBoundry>
-      <div className="book-list-item">
+      <div className="book-card">
         <div className="book-cover">
           <img src={coverImage} alt="cover" />
         </div>
@@ -18,8 +18,8 @@ const BookCard = ({ book, odAddedtoCart }) => {
           <div className="book-author">{author}</div>
           <div className="book-price">${price}</div>
           <button
-              onClick={odAddedtoCart}
-              className="btn btn-info add-to-cart"
+            onClick={onAddtoCart}
+            className="btn btn-info add-to-cart"
           >
             Add to cart
           </button>

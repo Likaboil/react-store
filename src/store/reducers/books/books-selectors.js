@@ -1,13 +1,9 @@
+import { createSelector } from 'reselect';
 import NameSpace from '../name-space';
 
 const NAME_SPACE = NameSpace.BOOKS;
 
-const getBooks = (state) => state[NAME_SPACE].books;
-const getBooksLoading = (state) => state[NAME_SPACE].loading;
-const getBooksError = (state) => state[NAME_SPACE].error
+const selectState = (state) => state[NAME_SPACE];
 
-export {
-  getBooks,
-  getBooksLoading,
-  getBooksError
-};
+export const selectBooks = createSelector(selectState, (state) => state.books);
+export const selectStatus = createSelector(selectState, (state) => state.status);

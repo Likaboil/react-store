@@ -1,7 +1,11 @@
 import { applyMiddleware, createStore } from 'redux';
-import thunkMiddleware from 'redux-thunk'
+import thunk from 'redux-thunk'
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 import rootReducer from './reducers/reducer';
+import BookstoreService from '../api';
+
+const bookstoreService = new BookstoreService();
 
 // custom middleware to show action type in console
 const logMiddleware = () => (dispatch) => (action) => {
@@ -11,9 +15,11 @@ const logMiddleware = () => (dispatch) => (action) => {
 
 const store = createStore(
   rootReducer,
-  applyMiddleware(
-    thunkMiddleware,
-    logMiddleware
+  composeWithDevTools(
+    applyMiddleware(
+      thunk.withExtraArgument(bookstoreService),
+      logMiddleware
+    )
   )
 );
 

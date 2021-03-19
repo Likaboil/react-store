@@ -1,30 +1,22 @@
+import { DataStatus } from '../../../constants/status';
 import * as BooksTypes from './books-types';
 
 const initialState = {
-    books: [],
-    loading: true,
-    error: null,
-}
+  books: [],
+  status: DataStatus.INIT,
+};
 
 const bookReducer = (state = initialState, action) => {
   switch (action.type) {
-    case BooksTypes.FETCH_BOOKS_REQUEST:
+    case BooksTypes.SET_BOOKS:
       return {
-        books: [],
-        loading: true,
-        error: null,
-      };
-    case BooksTypes.FETCH_BOOKS_SUCCESS:
-      return {
+        ...state,
         books: action.payload,
-        loading: false,
-        error: null,
       };
-    case BooksTypes.FETCH_BOOKS_ERROR:
+    case BooksTypes.SET_BOOKS_STATUS:
       return {
-        books: [],
-        loading: false,
-        error: action.payload,
+        ...state,
+        status: action.payload,
       };
     default:
       return state;
