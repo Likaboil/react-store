@@ -46,7 +46,7 @@ Structure
 
 * src
     * api
-      * Test-swapi return mock-data
+      * mock-api return mock-data
     * App - the main component in app
     * components
       * Error-boundry, Error-button, Error-indicator and Spinner are used in case error or loading
