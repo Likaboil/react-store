@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
 import './header.css';
 
 import ErrorBoundry from '../error-boundry';
+import { cartSelectors } from '../../store/reducers/cart';
 
-const Header = ({ amountItems, total }) => {
+const Header = (props) => {
+  const { amountItems, total } = props;
 
   return (
     <ErrorBoundry>
@@ -14,10 +16,12 @@ const Header = ({ amountItems, total }) => {
         <h3 className="visually-hidden">Store Header</h3>
         <nav className="navbar">
           <div className="container-md">
+
             <Link to="/"
                   className="nav-link">
               <span className="logo text-dark">Store</span>
             </Link>
+
             <Link to="/cart"
                   className="nav-link">
               <span className="shopping-cart text-dark">
@@ -25,6 +29,7 @@ const Header = ({ amountItems, total }) => {
                 {amountItems} items (${total})
               </span>
             </Link>
+
           </div>
         </nav>
       </header>
@@ -37,4 +42,11 @@ Header.propTypes = {
   total: PropTypes.number,
 };
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    amountItems: cartSelectors.selectItemsAmount(state),
+    total: cartSelectors.selectTotal(state),
+  };
+};
+
+export default connect(mapStateToProps)(Header);

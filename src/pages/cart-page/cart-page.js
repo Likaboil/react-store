@@ -1,7 +1,7 @@
 import React from 'react';
 
-import CartTable from '../../cart-table';
-import ErrorBoundry from '../../error-boundry';
+import CartTable from '../../components/cart-table';
+import ErrorBoundry from '../../components/error-boundry';
 
 const CartPage = () => {
   return (

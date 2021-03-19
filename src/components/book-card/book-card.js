@@ -1,17 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-
-import './book-list-item.css';
+import './book-card.css';
 
 import ErrorBoundry from '../error-boundry';
 
-const BookListItem = ({ book, odAddedtoCart }) => {
-
+const BookCard = (props) => {
+  const { book, onAddtoCart } = props;
   const { title, author, price, coverImage } = book;
 
   return (
     <ErrorBoundry>
-      <div className="book-list-item">
+      <div className="book-card">
         <div className="book-cover">
           <img src={coverImage} alt="cover" />
         </div>
@@ -20,20 +18,15 @@ const BookListItem = ({ book, odAddedtoCart }) => {
           <div className="book-author">{author}</div>
           <div className="book-price">${price}</div>
           <button
-              onClick={odAddedtoCart}
-              className="btn btn-info add-to-cart"
+            onClick={onAddtoCart}
+            className="btn btn-info add-to-cart"
           >
             Add to cart
           </button>
         </div>
       </div>
     </ErrorBoundry>
-  )
+  );
 };
 
-BookListItem.propTypes = {
-  odAddedtoCart: PropTypes.func,
-  book: PropTypes.object.isRequired,
-};
-
-export default BookListItem;
+export default BookCard;

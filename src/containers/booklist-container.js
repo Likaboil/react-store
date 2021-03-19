@@ -1,66 +1,64 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 
-import { withBookstoreService } from '../components/hoc';
-import { booksOperations } from '../store/reducers/books/';
-import { bookAddedToCart } from '../store/reducers/cart/cart-actions';
-import { compose } from '../lib';
 import Spinner from '../components/spinner';
 import ErrorIndicator from '../components/error-indicator';
 import BookList from '../components/book-list';
-import {
-  getBooks,
-  getBooksLoading,
-  getBooksError
-} from '../store/reducers/books/books-selectors';
+import { selectBooks, selectStatus} from '../store/reducers/books/books-selectors';
+import { increaseItem } from '../store/reducers/cart/cart-actions';
+import { DataStatus } from '../constants/status';
+import { fetchBooks } from '../store/reducers/books/books-operations';
+
 
 class BookListContainer extends Component {
+
+  static propTypes = {
+    books: PropTypes.arrayOf(PropTypes.object).isRequired,
+    onAddtoCart: PropTypes.func,
+    status: PropTypes.string,
+  }
 
   componentDidMount() {
     this.props.fetchBooks();
   }
 
   render() {
-    const {books, loading, error, odAddedtoCart} = this.props;
+    const {books, status, onAddToCart} = this.props;
 
-    if (loading) {
+    if (status === DataStatus.LOADING) {
       return <Spinner />;
     };
 
-    if (error) {
+    if (status === DataStatus.ERROR) {
       return <ErrorIndicator />;
+    };
+
+    if (!books.length) {
+      return <p>No available books!</p>;
     };
 
     return <BookList
               books={books}
-              odAddedtoCart={odAddedtoCart}
+              onAddtoCart={onAddToCart}
            />
   }
 };
 
 // describes what data the component will receive from redax
 const mapStateToProps = (state) => {
-
   return {
-    books: getBooks(state),
-    loading: getBooksLoading(state),
-    error: getBooksError(state)
+    books: selectBooks(state),
+    status: selectStatus(state),
   };
 };
 
 // dispatch data changes
-const mapDispatchToProps = (dispatch, ownProps) => {
-  const { bookstoreService } = ownProps;
-
-  return bindActionCreators(
-    {
-      fetchBooks: booksOperations(bookstoreService),
-      odAddedtoCart: bookAddedToCart
-  }, dispatch)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchBooks: () => dispatch(fetchBooks()),
+    onAddToCart: (item) => dispatch(increaseItem(item)),
+  };
 };
 
-export default compose(
-    withBookstoreService(),
-    connect(mapStateToProps, mapDispatchToProps)
-    )(BookListContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(BookListContainer);

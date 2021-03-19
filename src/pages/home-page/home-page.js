@@ -1,7 +1,7 @@
 import React from 'react';
 
-import BookListContainer from '../../../containers';
-import ErrorBoundry from '../../error-boundry';
+import BookListContainer from '../../containers/booklist-container';
+import ErrorBoundry from '../../components/error-boundry';
 
 const HomePage = () => {
 

@@ -42,27 +42,27 @@ Improved in training project by myself:
 Structure
 -----------------------------------
 * public
-  *images and initial markup file used when building the project*
+  * images and initial markup file used when building the project*
 
 * src
     * api
       * Test-swapi return mock-data
+    * App - the main component in app
     * components
       * Error-boundry, Error-button, Error-indicator and Spinner are used in case error or loading
-      * BookList, BookListItem, Cart-table, Hoc is elements to create main components - pages
-      * Pages includes HomePage and CartPage
-      * App - the main component in app
-      * Bookstore-context use to create App-Context
+      * BookList, BookCard, Cart-table - elements to create main components - pages
     * containers
+    * constants
+    * pages
+      * includes HomePage with books and CartPage
     * store
+      * lib - store utils
       * reducer
         * actions
         * types of action
         * selectors  - to work with state-data
         * operations - middleware
         * local-reducer - to manage local-state
-    * lib
-      * Contains project-utils
 
 Tools
 -----------------------------------
@@ -72,6 +72,7 @@ Tools
 * Redux
 * React-redux
 * Reselect
+* Redux-devTools-extension
 * Prop-types
 * HTML 5
 * Css 3
