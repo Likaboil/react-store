@@ -1,16 +1,17 @@
-import {
-  booksLoaded,
-  booksRequested,
-  booksError
-} from './books-action';
+import { setBooks, setBooksStatus } from './books-actions';
+import { DataStatus } from '../../../constants/status';
 
-const fetchBooks = (bookstoreService) => () => (dispatch) => {
+export const fetchBooks = () => (dispatch, getState, api) => {
 
-  dispatch(booksRequested()); // show spinner until get data
-
-  bookstoreService.getBooks()  // recieve data
-   .then((data) => dispatch(booksLoaded(data)))  // dispatch action to store
-   .catch((error) => dispatch(booksError(error)));
+  return api.getBooks()  // recieve data
+    .then((data) => {
+      // show spinner until get data
+      dispatch(setBooksStatus(DataStatus.LOADING));
+      // dispatch data to store
+      dispatch(setBooks(data));
+      dispatch(setBooksStatus(DataStatus.SUCCESS));
+    })
+  .catch(() => {
+    dispatch(setBooksStatus(DataStatus.ERROR));
+  });
 };
-
-export default fetchBooks;

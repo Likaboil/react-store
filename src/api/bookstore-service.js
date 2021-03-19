@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
 
+const delay = (ms) => new Promise((res) => { setTimeout(res, ms) });
+
 export default class BookstoreService {
 
   static defaultProps = {
-    delayInterval: 700,
+    delayInterval: 3000,
   }
 
   static propTypes = {
@@ -25,15 +27,13 @@ export default class BookstoreService {
       coverImage: 'https://images-na.ssl-images-amazon.com/images/I/414CRjLjwgL._SX403_BO1,204,203,200_.jpg'}
   ]
 
-  getBooks() {
-    return new Promise((resolve, reject) => {
-      setTimeout(()=> {
-        if (Math.random() > 0.75) {
-          reject(new Error('Something is wrong'));
-        } else {
-          resolve(this.data);
-        }
-      }, this.delayInterval)
-    });
+  async getBooks() {
+    await delay(this.delayInterval);
+
+    if (Math.random() > 0.75) {
+      throw new Error('Something is wrong');
+    }
+
+    return this.data;
   }
 };

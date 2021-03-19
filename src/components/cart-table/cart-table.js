@@ -1,57 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-
 import './cart-table.css';
 
-import {
-  bookAddedToCart,
-  bookRemovedFromCart,
-  allBooksRemovedFromCart
-} from '../../store/reducers/cart/cart-actions';
-import {
-  getCartItems,
-  getCartTotal
-} from '../../store/reducers/cart/cart-selectors';
+import Row from './row';
+import { cartActions, cartSelectors } from '../../store/reducers/cart';
 
-const CartTable = ({ items, orderTotal,
-                      onIncrease, onDecrease, onDelete}) => {
-
-  const renderRow = (item, idx) => {
-    const {id, count, title, price, total} = item;
-
-    return (
-      <tr key={id}>
-
-        <td>{++idx}</td>
-        <td>{title}</td>
-        <td>{count}</td>
-        <td>{price}</td>
-        <td>{total}</td>
-
-        <td>
-          <button
-              onClick = {() => onIncrease(item)}
-              className="btn btn-outline-success btn-sm float-right"
-          >
-            <i className="fa fa-plus-circle" />
-          </button>
-          <button
-              onClick = {() => onDecrease(item)}
-              className="btn btn-outline-warning btn-sm float-right"
-          >
-            <i className="fa fa-minus-circle" />
-          </button>
-          <button
-              onClick = {() => onDelete(item)}
-              className="btn btn-outline-danger btn-sm float-right"
-          >
-            <i className="fa fa-trash-o" />
-          </button>
-        </td>
-      </tr>
-    );
-  };
+const CartTable = (props) => {
+  const { items, total, increaseItem, decreaseItem, deleteItem } = props;
 
   return (
     <div className="shopping-cart-table">
@@ -70,36 +25,39 @@ const CartTable = ({ items, orderTotal,
         </thead>
 
         <tbody>
-          {items.map(renderRow)}
+          {items.map((item, index) => (
+            <Row
+              key={`row-${item.id}`}
+              item={item}
+              index={++index}
+              increaseItem={increaseItem}
+              decreaseItem={decreaseItem}
+              deleteItem={deleteItem}
+            />
+          ))}
         </tbody>
       </table>
 
       <div className="total">
-        Total: ${orderTotal}
+        Total: ${total}
       </div>
     </div>
   );
 };
 
-CartTable.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object).isRequired,
-  orderTotal: PropTypes.number,
-  onIncrease: PropTypes.func,
-  onDelete: PropTypes.func,
-  onDecrease: PropTypes.func,
-};
-
 const mapStateToProps = (state) => {
   return {
-    items: getCartItems(state),
-    orderTotal: getCartTotal(state)
+    items: cartSelectors.selectItems(state),
+    total: cartSelectors.selectTotal(state)
   };
 };
 
-const mapDispatchToProps = {
-  onIncrease: bookAddedToCart,
-  onDecrease: bookRemovedFromCart,
-  onDelete: allBooksRemovedFromCart,
+const mapDispatchToProps = (dispatch) => {
+  return {
+    increaseItem: (item) => dispatch(cartActions.increaseItem(item)),
+    decreaseItem: (item) => dispatch(cartActions.decreaseItem(item)),
+    deleteItem: (item) => dispatch(cartActions.deleteItem(item)),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartTable);

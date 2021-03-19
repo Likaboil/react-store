@@ -1,15 +1,6 @@
 import cartReducer from './cart-reducer';
 
-import {
-  bookAddedToCart,
-  bookRemovedFromCart,
-  allBooksRemovedFromCart
-} from './cart-actions';
-
-export {
-  bookAddedToCart,
-  bookRemovedFromCart,
-  allBooksRemovedFromCart
-};
+export  * as cartActions from './cart-actions';
+export  * as cartSelectors from './cart-selectors';
 
 export default cartReducer;
