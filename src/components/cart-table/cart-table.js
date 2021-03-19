@@ -1,21 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 import './cart-table.css';
 
-import {
-  bookAddedToCart,
-  bookRemovedFromCart,
-  allBooksRemovedFromCart
-} from '../../store/reducers/cart/cart-actions';
-import {
-  getCartItems,
-  getCartTotal
-} from '../../store/reducers/cart/cart-selectors';
 import Row from './row';
+import { cartActions, cartSelectors } from '../../store/reducers/cart';
 
 const CartTable = (props) => {
-  const { items, orderTotal,  onIncrease, onDecrease, onDelete } = props;
+  const { items, total, increaseItem, decreaseItem, deleteItem } = props;
 
   return (
     <div className="shopping-cart-table">
@@ -39,16 +30,16 @@ const CartTable = (props) => {
               key={`row-${item.id}`}
               item={item}
               index={++index}
-              onIncrease={onIncrease}
-              onDecrease={onDecrease}
-              onDelete={onDelete}
+              increaseItem={increaseItem}
+              decreaseItem={decreaseItem}
+              deleteItem={deleteItem}
             />
           ))}
         </tbody>
       </table>
 
       <div className="total">
-        Total: ${orderTotal}
+        Total: ${total}
       </div>
     </div>
   );
@@ -56,17 +47,17 @@ const CartTable = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    items: getCartItems(state),
-    orderTotal: getCartTotal(state)
+    items: cartSelectors.selectItems(state),
+    total: cartSelectors.selectTotal(state)
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onIncrease: (item) => dispatch(bookAddedToCart(item)),
-    onDecrease: (item) => dispatch(bookRemovedFromCart(item)),
-    onDelete: (item) => dispatch(allBooksRemovedFromCart(item)),
-  }
+    increaseItem: (item) => dispatch(cartActions.increaseItem(item)),
+    decreaseItem: (item) => dispatch(cartActions.decreaseItem(item)),
+    deleteItem: (item) => dispatch(cartActions.deleteItem(item)),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartTable);
